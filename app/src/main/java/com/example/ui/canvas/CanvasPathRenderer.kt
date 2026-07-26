@@ -19,6 +19,8 @@ import com.example.data.models.SelectionState
 import com.example.data.models.ToolType
 import com.example.utils.DrawingUtils
 
+import androidx.compose.ui.graphics.toArgb
+
 object CanvasPathRenderer {
 
     fun drawLayerContent(
@@ -70,6 +72,9 @@ object CanvasPathRenderer {
                         ToolType.ERASER -> drawEraserPath(drawScope, pathModel)
                         ToolType.STAMP -> CanvasStampRenderer.drawStampPath(drawScope, pathModel)
                         ToolType.GLOW -> drawGlowPath(drawScope, pathModel)
+                        ToolType.SPARKLE_BRUSH -> drawSparkleBrushPath(drawScope, pathModel)
+                        ToolType.BUBBLE_BRUSH -> drawBubbleBrushPath(drawScope, pathModel)
+                        ToolType.GALAXY_BRUSH -> drawGalaxyBrushPath(drawScope, pathModel)
                         ToolType.CRAYON -> drawCrayonPath(drawScope, pathModel)
                         ToolType.DUAL_BRUSH -> drawDualBrushPath(drawScope, pathModel)
                         ToolType.BUCKET -> drawBucketPath(drawScope, pathModel)
@@ -147,6 +152,93 @@ object CanvasPathRenderer {
                 join = StrokeJoin.Round
             )
         )
+    }
+
+    private fun drawSparkleBrushPath(drawScope: DrawScope, pathModel: DrawingPath) {
+        val points = pathModel.points
+        if (points.isEmpty()) return
+
+        // 1. Base smooth line
+        drawStandardPath(drawScope, pathModel)
+
+        // 2. Scatter sparkles along points
+        val size = pathModel.strokeWidth * 1.2f
+        val interval = (points.size / 12).coerceAtLeast(1)
+        points.forEachIndexed { index, pt ->
+            if (index % interval == 0) {
+                val offset = pt.toOffset()
+                val color = if (pathModel.isRainbow) DrawingUtils.getRainbowColor(index, points.size) else Color(0xFFFFCA3A)
+                CanvasStampRenderer.drawStampPath(
+                    drawScope,
+                    DrawingPath(
+                        points = listOf(pt),
+                        strokeWidth = size,
+                        colorArgb = color.toArgb(),
+                        stampShape = com.example.data.models.StampShape.SPARKLE,
+                        toolType = ToolType.STAMP
+                    )
+                )
+            }
+        }
+    }
+
+    private fun drawBubbleBrushPath(drawScope: DrawScope, pathModel: DrawingPath) {
+        val points = pathModel.points
+        if (points.isEmpty()) return
+
+        val radius = pathModel.strokeWidth * 1.1f
+        val baseColor = pathModel.getColor().copy(alpha = 0.35f)
+        val strokeColor = pathModel.getColor().copy(alpha = 0.8f)
+
+        var lastPt: Offset? = null
+        val minDist = radius * 0.7f
+
+        points.forEach { pt ->
+            val offset = pt.toOffset()
+            if (lastPt == null || (offset - lastPt!!).getDistance() >= minDist) {
+                // Bubble fill
+                drawScope.drawCircle(color = baseColor, radius = radius, center = offset)
+                // Bubble rim
+                drawScope.drawCircle(color = strokeColor, radius = radius, center = offset, style = Stroke(width = 3f))
+                // Shiny highlight arc
+                drawScope.drawCircle(
+                    color = Color.White.copy(alpha = 0.85f),
+                    radius = radius * 0.3f,
+                    center = Offset(offset.x - radius * 0.35f, offset.y - radius * 0.35f)
+                )
+                lastPt = offset
+            }
+        }
+    }
+
+    private fun drawGalaxyBrushPath(drawScope: DrawScope, pathModel: DrawingPath) {
+        val points = pathModel.points
+        if (points.isEmpty()) return
+
+        val path = buildSmoothPath(points)
+
+        // Cosmic Outer Glow
+        drawScope.drawPath(
+            path = path,
+            color = Color(0xFF9D4EDD).copy(alpha = 0.4f),
+            style = Stroke(width = pathModel.strokeWidth * 2f, cap = StrokeCap.Round, join = StrokeJoin.Round)
+        )
+        // Cosmic Inner Path
+        drawScope.drawPath(
+            path = path,
+            color = Color(0xFF240046).copy(alpha = 0.9f),
+            style = Stroke(width = pathModel.strokeWidth * 1.2f, cap = StrokeCap.Round, join = StrokeJoin.Round)
+        )
+
+        // Twinkling Star Dust
+        val interval = (points.size / 15).coerceAtLeast(1)
+        points.forEachIndexed { idx, pt ->
+            if (idx % interval == 0) {
+                val offset = pt.toOffset()
+                val starColor = if (idx % 2 == 0) Color.White else Color(0xFFFFD166)
+                drawScope.drawCircle(color = starColor, radius = pathModel.strokeWidth * 0.25f, center = offset)
+            }
+        }
     }
 
     private fun drawCrayonPath(drawScope: DrawScope, pathModel: DrawingPath) {

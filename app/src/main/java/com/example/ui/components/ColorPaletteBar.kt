@@ -34,18 +34,34 @@ import androidx.compose.ui.unit.sp
 import com.example.ui.canvas.CanvasUiState
 
 val PALETTE_COLORS = listOf(
+    // Alegres & Neón
     Color(0xFFFF3366), // Vibrant Pink
+    Color(0xFFFF0055), // Neon Fuego
     Color(0xFFFF595E), // Coral Red
-    Color(0xFFFF924C), // Orange
-    Color(0xFFFFCA3A), // Bright Yellow
-    Color(0xFF8AC926), // Lime Green
+    Color(0xFFFF924C), // Bright Orange
+    Color(0xFFFFCA3A), // Sunny Yellow
+    Color(0xFFCCFF00), // Neon Lime Green
+    Color(0xFF8AC926), // Apple Green
     Color(0xFF06D6A0), // Emerald
-    Color(0xFF00C8FF), // Cyan
+    Color(0xFF00F0FF), // Electric Cyan
+    Color(0xFF00C8FF), // Vivid Sky Blue
     Color(0xFF1982C4), // Royal Blue
     Color(0xFF6A4C93), // Purple
-    Color(0xFFFF70A6), // Light Pink
+    Color(0xFF9D4EDD), // Neon Violet
+    Color(0xFFFF70A6), // Bubblegum Pink
+    // Pastel & Mágicos
+    Color(0xFFFFC6FF), // Pastel Lavender Pink
+    Color(0xFFBDB2FF), // Pastel Lilac
+    Color(0xFFA0C4FF), // Pastel Baby Blue
+    Color(0xFF9BF6FF), // Pastel Ice Blue
+    Color(0xFFCAFFBF), // Pastel Mint
+    Color(0xFFFDFFB6), // Pastel Cream
+    Color(0xFFFFADAD), // Pastel Peach
+    // Oscuros & BÁSICOS
     Color(0xFF8B4513), // Chocolate Brown
-    Color(0xFF2B2D42), // Dark Slate
+    Color(0xFF5A3E2B), // Deep Wood
+    Color(0xFF2B2D42), // Midnight Slate
+    Color(0xFF000000), // Pure Black
     Color(0xFFFFFFFF)  // Pure White
 )
 

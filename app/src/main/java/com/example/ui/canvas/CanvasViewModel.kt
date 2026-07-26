@@ -288,7 +288,10 @@ class CanvasViewModel : ViewModel() {
             ToolType.DUAL_BRUSH -> "Pincel Doble"
             ToolType.CRAYON -> "Cera de colorear"
             ToolType.GLOW -> "Pincel de Neón y Brillo"
-            ToolType.STAMP -> "Sellos de figuras"
+            ToolType.SPARKLE_BRUSH -> "Pincel de Estrellitas Mágicas"
+            ToolType.BUBBLE_BRUSH -> "Pincel de Burbujas"
+            ToolType.GALAXY_BRUSH -> "Pincel Galáctico Cósmico"
+            ToolType.STAMP -> "Sellos y Stickers"
             ToolType.BUCKET -> "Balde de pintura"
             ToolType.ERASER -> "Goma de borrar"
             ToolType.SELECT -> "Herramienta de selección Lazo"
@@ -319,6 +322,13 @@ class CanvasViewModel : ViewModel() {
             StampShape.FLOWER -> "Flor"
             StampShape.PAW -> "Huellita"
             StampShape.SUN -> "Sol brillante"
+            StampShape.GOOGLY_EYES -> "Ojitos Saltones"
+            StampShape.GOOGLY_EYE_SINGLE -> "Ojito Saltón"
+            StampShape.STICKER_CAT -> "Gatito lindo"
+            StampShape.STICKER_CROWN -> "Corona real"
+            StampShape.STICKER_MAGIC_WAND -> "Varita mágica"
+            StampShape.STICKER_BOW -> "Lazo coquetón"
+            StampShape.STICKER_SUNGLASSES -> "Gafas de sol geniales"
         }
         speak("Sello de $shapeName")
     }

@@ -40,6 +40,13 @@ data class StampOption(
 )
 
 val STAMP_OPTIONS = listOf(
+    StampOption(StampShape.GOOGLY_EYES, "Ojitos Saltones", "👀"),
+    StampOption(StampShape.GOOGLY_EYE_SINGLE, "Ojito Saltón", "👁️"),
+    StampOption(StampShape.STICKER_CAT, "Gatito", "🐱"),
+    StampOption(StampShape.STICKER_CROWN, "Corona", "👑"),
+    StampOption(StampShape.STICKER_MAGIC_WAND, "Varita Mágica", "🪄"),
+    StampOption(StampShape.STICKER_BOW, "Lazo Coquetón", "🎀"),
+    StampOption(StampShape.STICKER_SUNGLASSES, "Gafas de Sol", "🕶️"),
     StampOption(StampShape.STAR, "Estrella", "⭐"),
     StampOption(StampShape.HEART, "Corazón", "💖"),
     StampOption(StampShape.SPARKLE, "Chispa", "✨"),

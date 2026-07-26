@@ -8,8 +8,17 @@
 
 - **🎨 Herramientas de Dibujo Mágicas:**
   - Lápiz, Pincel Suave, **Pincel Doble ✌️**, Crayón, Marcador de Neón, Borrador y Herramienta de Relleno (Balde de Pintura).
-  - **Pincel Doble:** Trazo paralelo dinámico con síntesis de color complementario para efectos caligráficos y de diseño.
-  - **Sello Mágico (Stamps):** Estampa estrellas, corazones, chispas, flores, huellas, soles y arcoíris.
+  - **Pinceles con Texturas Especiales 🌟:**
+    - **Estrellitas Mágicas ⭐:** Trazo que dispersa chispas doradas y multicolores brillantes a lo largo del recorrido.
+    - **Burbujas Translúcidas 🫧:** Trazos de burbujas flotantes con borde suave y reflejo brillante.
+    - **Galaxia Cósmica 🌌:** Trazo con resplandor púrpura profundo cargado de estrellas y polvo estelar brillante.
+  - **Paleta de Colores Expandida & Mezclador Personalizado 🌈:**
+    - Paletas categorizadas: Neón, Dulces Pasteles, Fuego, Metálicos y Básicos.
+    - Modal de Mezclador con controles deslizantes RGB y presets instantáneos.
+  - **Sellos & Stickers con Ojitos Saltones 👀👑🐱:**
+    - **Ojitos Saltones 👀 / 👁️:** Ojos 3D en caricatura con pupilas que dan vida a cualquier dibujo.
+    - **Stickers Mágicos:** Gatito 🐱, Corona Real 👑, Varita Mágica 🪄, Lazo Coquetón 🎀, Gafas de Sol 🕶️.
+    - **Sellos Clásicos:** Estrellas ⭐, Corazones 💖, Chispas ✨, Flores 🌸, Huellas 🐾, Soles ☀️ y Arcoíris 🌈.
   - **Modo Arcoíris Rainbow 🌈:** Trazos dinámicos con variaciones de matiz de color en tiempo real.
   - **Efecto Neón / Brillo ✨:** Resplandor brillante alrededor de cada trazo.
 
@@ -24,16 +33,17 @@
 - **⚔️ Modo Duelo de Dibujo 1vs1 Local con Juez Mágico AI (Gemini Vision & Reasoning):**
   - Dos niños pueden competir o colaborar turnándose en el mismo dispositivo.
   - **Generador AI de Temas Creativos:** Gemini genera frases disparatadas e imaginativas adaptadas para niños.
-  - **Juez Mágico AI Multimodal:** Analiza visualmente ambas obras con el modelo `gemini-3.5-flash` (modo visión y razonamiento elevado), otorga estrellas, resalta detalles creativos en ambos dibujos y da un veredicto alegre narrado en voz alta por el Asistente de Voz.
+  - **Juez Mágico AI Multimodal:** Analiza visualmente ambas obras con el modelo `gemini-2.5-flash` (modo visión y razonamiento estructurado), otorga estrellas, resalta detalles creativos en ambos dibujos y da un veredicto alegre narrado en voz alta por el Asistente de Voz, respaldado con sistema de fallback automático ante fallos de conexión.
 
 - **🔊 Asistente de Voz para Niños (Modo Lectura Audible):**
   - **Pantalla de Bienvenida interactiva (`WelcomeScreen.kt`):** Guía visual y hablada con iconos explicativos de cada herramienta antes de entrar al lienzo.
   - Motor Text-To-Speech en español que narra en voz alta cada herramienta seleccionada, cambios de color, nombres de capas, sellos y acciones del lienzo.
   - Pensado especialmente para niños pequeños que aún no saben leer.
 
-- **🥞 Sistema Multi-Capa Profesional (Layers):**
-  - Crear, duplicar, reordenar y eliminar capas.
-  - Control de opacidad por capa y bloqueo de visibilidad/edición.
+- **🥞 Sistema Multi-Capa Avanzado y Profesional (Layers Sheet):**
+  - Crear, renombrar, duplicar, combinar hacia abajo (Merge Down), limpiar contenido y eliminar capas.
+  - Control dinámico de opacidad (0% a 100%), ocultamiento (Visibility) y bloqueo de edición (Lock).
+  - Previsualización en miniatura (Live Thumbnails) en tiempo real para cada capa del dibujo.
 
 - **✂️ Herramienta de Selección & Transformación:**
   - Selección de lazo (Lasso Tool) para recortar, mover, duplicar o eliminar trazos de forma independiente.

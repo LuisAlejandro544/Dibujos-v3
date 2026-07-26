@@ -13,6 +13,9 @@ enum class ToolType {
     DUAL_BRUSH,
     CRAYON,
     GLOW,
+    SPARKLE_BRUSH,
+    BUBBLE_BRUSH,
+    GALAXY_BRUSH,
     STAMP,
     BUCKET,
     ERASER,
@@ -26,7 +29,14 @@ enum class StampShape {
     RAINBOW,
     FLOWER,
     PAW,
-    SUN
+    SUN,
+    GOOGLY_EYES,
+    GOOGLY_EYE_SINGLE,
+    STICKER_CAT,
+    STICKER_CROWN,
+    STICKER_MAGIC_WAND,
+    STICKER_BOW,
+    STICKER_SUNGLASSES
 }
 
 enum class StencilType(val title: String, val icon: String) {

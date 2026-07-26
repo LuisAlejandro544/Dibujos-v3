@@ -42,8 +42,11 @@ val KIDS_TOOLS = listOf(
     ToolItemInfo(ToolType.DUAL_BRUSH, "Pincel Doble", "✌️", Color(0xFFFF3366)),
     ToolItemInfo(ToolType.CRAYON, "Cera", "🖍️", Color(0xFF8AC926)),
     ToolItemInfo(ToolType.GLOW, "Neón", "✨", Color(0xFF1982C4)),
-    ToolItemInfo(ToolType.STAMP, "Sellos", "🌟", Color(0xFF6A4C93)),
-    ToolItemInfo(ToolType.BUCKET, "Cubo", "🎨", Color(0xFFFF924C)),
+    ToolItemInfo(ToolType.SPARKLE_BRUSH, "Estrellas", "⭐", Color(0xFFFFCA3A)),
+    ToolItemInfo(ToolType.BUBBLE_BRUSH, "Burbujas", "🫧", Color(0xFF00C8FF)),
+    ToolItemInfo(ToolType.GALAXY_BRUSH, "Galaxia", "🌌", Color(0xFF6A4C93)),
+    ToolItemInfo(ToolType.STAMP, "Sellos", "🎨", Color(0xFF9D4EDD)),
+    ToolItemInfo(ToolType.BUCKET, "Cubo", "🪣", Color(0xFFFF924C)),
     ToolItemInfo(ToolType.SELECT, "Selección", "✂️", Color(0xFF00C8FF)),
     ToolItemInfo(ToolType.ERASER, "Goma", "🧹", Color(0xFFFF70A6))
 )

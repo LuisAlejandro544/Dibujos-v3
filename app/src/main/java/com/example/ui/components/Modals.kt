@@ -314,6 +314,19 @@ fun ColorPickerModal(
 
     val pickedColor = Color(red, green, blue)
 
+    val quickPresets = listOf(
+        Color(0xFFFF0055), // Neon Pink
+        Color(0xFFFF924C), // Neon Orange
+        Color(0xFFFFCA3A), // Bright Gold
+        Color(0xFFCCFF00), // Lime Green
+        Color(0xFF00F0FF), // Electric Blue
+        Color(0xFF9D4EDD), // Bright Purple
+        Color(0xFFFFC6FF), // Pastel Pink
+        Color(0xFFCAFFBF), // Mint
+        Color(0xFF5A3E2B), // Brown
+        Color(0xFF000000)  // Black
+    )
+
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             shape = RoundedCornerShape(28.dp),
@@ -326,24 +339,67 @@ fun ColorPickerModal(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "🌈 Mezclador de Colores",
+                    text = "🌈 Mezclador de Colores Mágico",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF1F2937)
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
                 // Color Preview Box
                 Box(
                     modifier = Modifier
-                        .size(90.dp)
+                        .size(80.dp)
                         .clip(CircleShape)
                         .background(pickedColor)
-                        .border(3.dp, Color(0xFFE5E7EB), CircleShape)
+                        .border(3.5.dp, Color(0xFFE5E7EB), CircleShape)
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Quick Palette Swatches
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    quickPresets.take(5).forEach { color ->
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(28.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(color)
+                                .clickable {
+                                    red = color.red
+                                    green = color.green
+                                    blue = color.blue
+                                }
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(6.dp))
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    quickPresets.drop(5).take(5).forEach { color ->
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(28.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(color)
+                                .clickable {
+                                    red = color.red
+                                    green = color.green
+                                    blue = color.blue
+                                }
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
 
                 // Red Slider
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -358,27 +414,27 @@ fun ColorPickerModal(
 
                 // Green Slider
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Verde", fontWeight = FontWeight.Bold, color = Color.Green, modifier = Modifier.width(50.dp))
+                    Text(text = "Verde", fontWeight = FontWeight.Bold, color = Color(0xFF00C853), modifier = Modifier.width(50.dp))
                     Slider(
                         value = green,
                         onValueChange = { green = it },
-                        colors = SliderDefaults.colors(thumbColor = Color.Green, activeTrackColor = Color.Green),
+                        colors = SliderDefaults.colors(thumbColor = Color(0xFF00C853), activeTrackColor = Color(0xFF00C853)),
                         modifier = Modifier.weight(1f)
                     )
                 }
 
                 // Blue Slider
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Azul", fontWeight = FontWeight.Bold, color = Color.Blue, modifier = Modifier.width(50.dp))
+                    Text(text = "Azul", fontWeight = FontWeight.Bold, color = Color(0xFF1982C4), modifier = Modifier.width(50.dp))
                     Slider(
                         value = blue,
                         onValueChange = { blue = it },
-                        colors = SliderDefaults.colors(thumbColor = Color.Blue, activeTrackColor = Color.Blue),
+                        colors = SliderDefaults.colors(thumbColor = Color(0xFF1982C4), activeTrackColor = Color(0xFF1982C4)),
                         modifier = Modifier.weight(1f)
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(14.dp))
 
                 Button(
                     onClick = {

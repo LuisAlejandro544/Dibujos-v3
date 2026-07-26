@@ -59,7 +59,10 @@ val LANDSCAPE_TOOLS = listOf(
     LandscapeToolItem(ToolType.DUAL_BRUSH, "Doble", "✌️"),
     LandscapeToolItem(ToolType.CRAYON, "Cera", "🖍️"),
     LandscapeToolItem(ToolType.GLOW, "Brillo", "✨"),
-    LandscapeToolItem(ToolType.STAMP, "Sello", "⭐"),
+    LandscapeToolItem(ToolType.SPARKLE_BRUSH, "Estrellas", "⭐"),
+    LandscapeToolItem(ToolType.BUBBLE_BRUSH, "Burbujas", "🫧"),
+    LandscapeToolItem(ToolType.GALAXY_BRUSH, "Galaxia", "🌌"),
+    LandscapeToolItem(ToolType.STAMP, "Sello", "🎨"),
     LandscapeToolItem(ToolType.BUCKET, "Relleno", "🪣"),
     LandscapeToolItem(ToolType.ERASER, "Borrador", "🧹"),
     LandscapeToolItem(ToolType.SELECT, "Selección", "👆")
@@ -195,6 +198,13 @@ fun LandscapeQuickToolsRail(
                 )
 
                 val stamps = listOf(
+                    StampShape.GOOGLY_EYES to "👀",
+                    StampShape.GOOGLY_EYE_SINGLE to "👁️",
+                    StampShape.STICKER_CAT to "🐱",
+                    StampShape.STICKER_CROWN to "👑",
+                    StampShape.STICKER_MAGIC_WAND to "🪄",
+                    StampShape.STICKER_BOW to "🎀",
+                    StampShape.STICKER_SUNGLASSES to "🕶️",
                     StampShape.STAR to "⭐",
                     StampShape.HEART to "💖",
                     StampShape.SPARKLE to "✨",

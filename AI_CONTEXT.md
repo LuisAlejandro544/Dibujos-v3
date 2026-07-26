@@ -5,7 +5,7 @@ Este archivo sirve como **guía operativa obligatoria** para cualquier agente de
 ---
 
 ## 🎯 Propósito del Proyecto
-KidsDraw Canvas es una aplicación móvil Android nativa en Kotlin (Jetpack Compose) diseñada para experiencias artísticas infantiles con alta interactividad, desarrollo modular, soporte multi-capa, sellos, **herramienta de Pincel Doble**, **asistente de voz Text-To-Speech para niños que no saben leer**, **aceleración por GPU**, **modo horizontal adaptativo con riel de herramientas de acceso rápido**, **modo duelo de dibujo 1vs1 local con Juez Mágico AI (Gemini Vision & Reasoning)**, herramientas avanzadas de selección y persistencia local Room DB. Además, incorpora una arquitectura híbrida de rendimiento con extensiones JNI en C++ y Rust, e integración CI/CD con GitHub Actions.
+KidsDraw Canvas es una aplicación móvil Android nativa en Kotlin (Jetpack Compose) diseñada para experiencias artísticas infantiles con alta interactividad, desarrollo modular, gestor de capas avanzado (con renombrado, combinación hacia abajo, opacidad y miniaturas live), sellos, **stickers con ojitos saltones 👀 y accesorios**, **pinceles con texturas mágicas (Estrellitas ⭐, Burbujas 🫧, Galaxia 🌌)**, **paletas de colores expandidas neón/pastel y mezclador mágico**, **herramienta de Pincel Doble**, **asistente de voz Text-To-Speech para niños que no saben leer**, **aceleración por GPU**, **modo horizontal adaptativo con riel de herramientas de acceso rápido**, **modo duelo de dibujo 1vs1 local con Juez Mágico AI (Gemini 2.5 Flash Vision & Reasoning)**, herramientas avanzadas de selección y persistencia local Room DB. Además, incorpora una arquitectura híbrida de rendimiento con extensiones JNI en C++ y Rust, e integración CI/CD con GitHub Actions.
 
 ---
 
