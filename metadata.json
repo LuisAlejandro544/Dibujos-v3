@@ -1,0 +1,6 @@
+{
+  "name": "Pincel Mágico",
+  "description": "App de dibujo para niños con aceleración GPU, modo horizontal de herramientas rápidas, duelo 1vs1 en el mismo celular, voz para niños, capas y sellos mágicos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

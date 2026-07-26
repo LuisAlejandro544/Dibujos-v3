@@ -1,0 +1,99 @@
+name: Update Code from Telegram Zip
+
+on:
+  repository_dispatch:
+    types: [update_code_zip]
+  workflow_dispatch:
+    inputs:
+      zip_url:
+        description: 'URL directa del archivo ZIP'
+        required: true
+      chat_id:
+        description: 'Chat ID de Telegram opcional para notificaciones'
+        required: false
+
+jobs:
+  update-code:
+    name: Actualizar Código y Guardar en Main
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Extract Input Data
+        id: vars
+        run: |
+          URL="${{ github.event.client_payload.zip_url || inputs.zip_url }}"
+          CHAT_ID="${{ github.event.client_payload.chat_id || inputs.chat_id }}"
+          echo "zip_url=$URL" >> $GITHUB_OUTPUT
+          echo "chat_id=$CHAT_ID" >> $GITHUB_OUTPUT
+
+      - name: Download Zip File
+        run: |
+          echo "Descargando archivo ZIP desde: ${{ steps.vars.outputs.zip_url }}"
+          curl -sSL "${{ steps.vars.outputs.zip_url }}" -o incoming_code.zip
+          if [ ! -s incoming_code.zip ]; then
+            echo "Error: El archivo ZIP descargado está vacío o no es válido."
+            exit 1
+          fi
+
+      - name: Unzip & Overwrite Repository Code
+        run: |
+          echo "Descomprimiendo archivos..."
+          mkdir -p temp_unzip
+          unzip -o incoming_code.zip -d temp_unzip
+          
+          # Manejar caso de que el ZIP contenga una carpeta contenedora raíz única
+          SUB_DIRS=$(find temp_unzip -mindepth 1 -maxdepth 1 -type d)
+          NUM_ITEMS=$(ls -1 temp_unzip | wc -l)
+          
+          if [ "$NUM_ITEMS" -eq 1 ] && [ -n "$SUB_DIRS" ]; then
+            echo "Detectada carpeta raíz interna en el ZIP, moviendo contenido..."
+            cp -r $SUB_DIRS/* . || true
+            cp -r $SUB_DIRS/.* . 2>/dev/null || true
+          else
+            cp -r temp_unzip/* . || true
+            cp -r temp_unzip/.* . 2>/dev/null || true
+          fi
+
+          rm -rf temp_unzip incoming_code.zip
+
+      - name: Commit and Push Changes Directly to Main
+        id: commit_step
+        run: |
+          git config user.name "Telegram Auto Updater"
+          git config user.email "bot@github-action.local"
+          git add -A
+          
+          if git diff-index --quiet HEAD --; then
+            echo "No se detectaron cambios nuevos en el código."
+            echo "status=no_changes" >> $GITHUB_OUTPUT
+          else
+            git commit -m "auto: Actualización de código desde archivo ZIP enviada por Telegram"
+            git push origin main
+            echo "status=updated" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify Telegram Success
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ steps.vars.outputs.chat_id }}
+        if: ${{ env.TELEGRAM_BOT_TOKEN != '' && env.CHAT_ID != '' }}
+        run: |
+          STATUS="${{ steps.commit_step.outputs.status }}"
+          if [ "$STATUS" = "updated" ]; then
+            MSG="🎉 *¡Código actualizado con éxito en GitHub!*%0ANuevo commit guardado en la rama \`main\` de tu repositorio.%0A🚀 La compilación del APK ha comenzado automáticamente."
+          else
+            MSG="ℹ️ *No se detectaron cambios.* El código del ZIP enviado es idéntico al que ya está en la rama \`main\`."
+          fi
+          
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "text=$MSG" \
+            -d "parse_mode=Markdown"

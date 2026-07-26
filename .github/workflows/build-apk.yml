@@ -1,0 +1,64 @@
+name: Build & Sign Debug APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Signed Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Generate Debug Keystore On-The-Fly
+        run: |
+          echo "Generando clave de firma Debug en caliente..."
+          mkdir -p ~/.android
+          keytool -genkey -v \
+            -keystore debug.keystore \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug, O=KidsDraw, C=ES"
+          cp debug.keystore ~/.android/debug.keystore || true
+
+      - name: Grant Execute Permission for Gradle Wrapper
+        run: chmod +x gradlew || true
+
+      - name: Create .env File from GitHub Secrets
+        run: |
+          WORKER_URL="${{ secrets.GEMINI_WORKER_URL }}"
+          API_KEY="${{ secrets.GEMINI_API_KEY }}"
+          if [ -z "$WORKER_URL" ]; then WORKER_URL="https://dibujo.luisalejandrososacamacho9.workers.dev"; fi
+          if [ -z "$API_KEY" ]; then API_KEY="UNUSED_PROXY_MODE"; fi
+          echo "GEMINI_WORKER_URL=$WORKER_URL" > .env
+          echo "GEMINI_API_KEY=$API_KEY" >> .env
+
+      - name: Build Debug APK
+        run: gradle assembleDebug --stacktrace
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: KidsDraw-Debug-APK
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 14

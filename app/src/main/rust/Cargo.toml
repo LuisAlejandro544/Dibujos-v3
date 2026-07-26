@@ -1,0 +1,12 @@
+[package]
+name = "kidsdraw_rust_core"
+version = "0.1.0"
+edition = "2021"
+authors = ["KidsDraw Architecture Team"]
+description = "Memory-safe Rust module for stroke simplification and vector path compression in KidsDraw"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+jni = "0.21.1"
